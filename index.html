@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonics - Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Heading Section -->
+    <header class="app-header">
+        <div class="logo">
+            <i class="fa-solid fa-music"></i>
+            <h1>Harmonics</h1>
+        </div>
+        <button id="theme-toggle-btn" class="theme-btn" onclick="toggleTheme()">
+            <i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Light Mode</span>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        
+        <!-- 1. All Songs Section -->
+        <section class="all-song-div" id="all-songs-section">
+            <div class="section-header">
+                <h2>All Songs</h2>
+                <input type="text" id="song-search" placeholder="Search songs or artists..." oninput="filterSongs()">
+            </div>
+            
+            <div class="filter-container">
+                <label for="genre-select">Filter by Genre:</label>
+                <select id="genre-select" onchange="onGenreChange()">
+                    <option value="all">All Genres</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Electronic">Electronic</option>
+                    <option value="Hip-Hop">Hip-Hop</option>
+                </select>
+            </div>
+
+            <div class="song-list" id="song-list-container">
+                <!-- Dynamically populated song items -->
+            </div>
+        </section>
+
+        <!-- 2. Song Card Section (Currently Playing) -->
+        <section class="card-div" id="song-card-section">
+            <h2>Now Playing</h2>
+            <div class="song-card" id="active-song-card">
+                <div class="img-container">
+                    <img id="current-song-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300" alt="Song Thumbnail">
+                </div>
+                <div class="song-details">
+                    <h3 id="current-song-title">Select a song</h3>
+                    <p id="current-song-artist">Artist Name</p>
+                </div>
+
+                <!-- Audio Element -->
+                <audio id="audio-player" onended="playNext()"></audio>
+
+                <!-- Player Controls -->
+                <div class="player-controls">
+                    <button onclick="playPrev()" title="Previous"><i class="fa-solid fa-backward-step"></i></button>
+                    <button id="play-pause-btn" onclick="togglePlayPause()" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
+                    <button onclick="playNext()" title="Next"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+
+                <!-- Add to Playlist Component -->
+                <div class="add-to-playlist-box">
+                    <select id="playlist-target-select">
+                        <option value="">Select Playlist</option>
+                    </select>
+                    <button onclick="addToPlaylist()" class="action-btn">Add to Playlist</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Playlist Section -->
+        <section class="playlist-div" id="playlist-section">
+            <div class="section-header">
+                <h2>Playlists</h2>
+                <input type="text" id="playlist-search" placeholder="Search playlists..." oninput="filterPlaylists()">
+            </div>
+
+            <div class="create-playlist-box">
+                <input type="text" id="new-playlist-name" placeholder="New Playlist Name...">
+                <button onclick="createPlaylist()" class="action-btn"><i class="fa-solid fa-plus"></i> Create Playlist</button>
+            </div>
+
+            <div class="playlists-wrapper">
+                <div class="playlists-nav" id="playlists-nav-container">
+                    <!-- Dynamic playlist list -->
+                </div>
+                <div class="playlist-details-view" id="playlist-details-container">
+                    <h3>Select a playlist to view tracks</h3>
+                    <div id="playlist-songs-list" class="song-list"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
